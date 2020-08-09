@@ -1,0 +1,8 @@
+room_id,description,u,u_room_id,d,d_room_id,n,n_room_id,s,s_room_id,e,e_room_id,w,w_room_id
+1,You stand just outside the entrance of a hobbit hole.,0,0,0,0,0,0,0,0,0,0,1,2
+2,You are in the entrance hallway of the hobbit hole. A wizened wizard and small hobbit stand nearby looking curiously at you.,0,0,0,0,1,3,0,0,1,1,0,0
+3,You are at a crossroad. Which direction will you go?,0,0,0,0,0,0,1,2,1,6,1,4
+4,Little hobbits wonder what a tall stranger is doing in their hole. They don't know where you're going.,0,0,0,0,1,5,0,0,1,3,0,0
+5,Oh no! Dead end! You must have taken a wrong turn somewhere.,0,0,0,0,0,0,1,4,0,0,0,0
+6,Hobbit merriment is underway! You join in for a short while… but then it is time to continue to seek the lost treasure.,0,0,0,0,1,7,0,0,0,0,1,3
+7,TREASURE FOUND! aka YOU GOT THE JOB!!!!! Woooo! Thank you for playing :),0,0,0,0,0,0,1,6,0,0,0,0
