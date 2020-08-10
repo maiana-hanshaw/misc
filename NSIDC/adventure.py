@@ -1,5 +1,6 @@
 ### NAME:  adventure.py
 ### MODIFICATION HISTORY:  Written by Maiana Hanshaw for Python (08/08/2020);
+###                        Updated on 08/10/20 with help from Michael Brandt and Hannah Wilcox
 ### PURPOSE:  To create a small game for the NSIDC Software Developer Interview.
 
 ###############################################################################
@@ -28,6 +29,19 @@ def get_room_info(room, starting_room):
     if room != starting_room:
         room_id = room
         ind = config_df.index[config_df.room_id == room][0]      
+    return room_id, ind
+
+#########################
+
+def move_direction(room_id, direction):
+    room_id, ind = get_room_info(room_id, starting_room_id)   
+    letter = direction[0]
+    if config_df[letter][ind] == 0:
+        print("You cannot move {}.".format(direction))
+    if config_df[letter][ind] == 1:
+        room_id = config_df[letter + "_room_id"][ind]
+        ind = config_df.index[config_df.room_id == room_id][0]
+        print(config_df["description"][ind])        
     return room_id, ind
 
 #########################
@@ -90,13 +104,13 @@ if __name__ == "__main__":
             print("Thank you. Goodbye!")
             exit()
             
-        if command == "help":
+        elif command == "help":
             print("\n" + "The commands you can use are:" + "\n" + "look: show the description of the room" + "\n" + "north: attempt to move north" + "\n" + "south: attempt to move south" + "\n"
             + "east: attempt to move east" + "\n" + "west: attempt to move west" + "\n" + "up: attempt to move up" + "\n" + "down: attempt to move down" + "\n" + "quit: stop playing!" + "\n")      
         
-        if command == "look":
+        elif command == "look":
             room_id, ind = get_room_info(room_id, starting_room_id)
-            print(config_df["description"][ind] + "\n" + "Door location hints:")
+            print(str(config_df["description"][ind]) + "\n" + "Door location hints:")
                    
             if config_df["u"][ind] == 1:
                 print("- A cute Pixar movie.")
@@ -110,59 +124,8 @@ if __name__ == "__main__":
                 print("- The sun rises here.")
             if config_df["w"][ind] == 1:
                 print("- Life is peaceful there.")          
-            
-        if command == "up":
-            room_id, ind = get_room_info(room_id, starting_room_id)    
-            if config_df["u"][ind] == 0:
-                print("You cannot move up.")
-            if config_df["u"][ind] == 1:
-                room_id = config_df.u_room_id[ind]
-                new_ind = config_df.index[config_df.room_id == room_id][0]
-                print(config_df["description"][new_ind])
-                 
-        if command == "down":
-            room_id, ind = get_room_info(room_id, starting_room_id)    
-            if config_df["d"][ind] == 0:
-                print("You cannot move down.")
-            if config_df["d"][ind] == 1:
-                room_id = config_df.d_room_id[ind]
-                new_ind = config_df.index[config_df.room_id == room_id][0]
-                print(config_df["description"][new_ind])
-                
-        if command == "north":
-            room_id, ind = get_room_info(room_id, starting_room_id)    
-            if config_df["n"][ind] == 0:
-                print("You cannot move north.")
-            if config_df["n"][ind] == 1:
-                room_id = config_df.n_room_id[ind]
-                new_ind = config_df.index[config_df.room_id == room_id][0]
-                print(config_df["description"][new_ind])
-                 
-        if command == "south":
-            room_id, ind = get_room_info(room_id, starting_room_id)    
-            if config_df["s"][ind] == 0:
-                print("You cannot move south.")
-            if config_df["s"][ind] == 1:
-                room_id = config_df.s_room_id[ind]
-                new_ind = config_df.index[config_df.room_id == room_id][0]
-                print(config_df["description"][new_ind])
-                
-        if command == "east":
-            room_id, ind = get_room_info(room_id, starting_room_id)    
-            if config_df["e"][ind] == 0:
-                print("You cannot move east.")
-            if config_df["e"][ind] == 1:
-                room_id = config_df.e_room_id[ind]
-                new_ind = config_df.index[config_df.room_id == room_id][0]
-                print(config_df["description"][new_ind])
-                 
-        if command == "west":
-            room_id, ind = get_room_info(room_id, starting_room_id)    
-            if config_df["w"][ind] == 0:
-                print("You cannot move west.")
-            if config_df["w"][ind] == 1:
-                room_id = config_df.w_room_id[ind]
-                new_ind = config_df.index[config_df.room_id == room_id][0]
-                print(config_df["description"][new_ind])
+ 
+        else:
+            room_id, ind = move_direction(room_id, command)          
 
 ###############################################################################
